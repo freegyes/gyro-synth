@@ -6,7 +6,8 @@
   <title>Gyro Synth</title>
 </head>
 <body>
-  <canvas id="tilt" nx="tilt" width="100%"></canvas>
+  <canvas id="tilt" nx="tilt" width="300px"></canvas>
+  <canvas id="startBtn" nx="button"></canvas>
 
   <script>
 
@@ -16,12 +17,16 @@
   var osc = con.createOscillator();
   osc.connect(con.destination);
 
-  osc.start();
-
    var tilt;
     nx.onload = function(){
         tilt.on('*', tiltChanged);
+        startBtn.on('*', startTheSound);
     };
+
+    function startTheSound(data){
+        console.log(data);
+        osc.start();
+    }
 
     function tiltChanged(data){
         console.log(data);
