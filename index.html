@@ -24,13 +24,11 @@
     };
 
     function startTheSound(data){
-        console.log(data);
         osc.start();
     }
 
     function tiltChanged(data){
-        console.log(data);
-        osc.frequency.value = data.value;
+        osc.frequency.value = data.x * 100;
     }
   </script>
 </body>
