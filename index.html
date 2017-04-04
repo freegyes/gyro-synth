@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="./scripts/vendor/nexusUI.js"></script>  
+  <title>Gyro Synth</title>
+</head>
+<body>
+  <canvas id="tilt" nx="tilt"></canvas>
+
+  <script>
+
+  var audio_context = window.AudioContext || window.webkitAudioContext;
+  var con = new audio_context();
+
+  var osc = con.createOscillator();
+  osc.connect(con.destination);
+
+  osc.start();
+
+   var tilt;
+    nx.onload = function(){
+        tilt.on('*', tiltChanged);
+    };
+
+    function tiltChanged(data){
+        console.log(data);
+        osc.frequency.value = data.value;
+    }
+  </script>
+</body>
+</html>
