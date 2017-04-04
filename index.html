@@ -28,7 +28,7 @@
     }
 
     function tiltChanged(data){
-        osc.frequency.value = data.x * 100;
+        osc.frequency.value = Math.abs(data.x) * 10;
     }
   </script>
 </body>
