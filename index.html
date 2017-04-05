@@ -39,6 +39,7 @@
 
       function tiltChanged(data){
           osc.frequency.value = data.x * 500;
+          lfo.frequency.value = data.y * 15;
       }
 
       function startSynth(){
