@@ -2,36 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script src="./scripts/vendor/nexusUI.js"></script>  
+  <script src="./scripts/vendor/nexusUI.js"></script> 
+  <meta name="viewport" content="width=device-width"> 
   <title>Gyro Synth</title>
 </head>
 <body>
-  <canvas id="tilt" nx="tilt" width="300px"></canvas>
+  <canvas id="tilt" width="250px" height="250px" nx="tilt"></canvas>
+  <br />
   <canvas id="startBtn" nx="button"></canvas>
+</body>
 
-  <script>
+  <script>      
+    var audio_context = window.AudioContext || window.webkitAudioContext;
+    var con = new audio_context();
 
-  var audio_context = window.AudioContext || window.webkitAudioContext;
-  var con = new audio_context();
-
-  var osc = con.createOscillator();
-  osc.connect(con.destination);
-
-   var tilt;
+    var osc = con.createOscillator();
+      
+    osc.connect(con.destination);
+      
+    var tilt, startBtn;
+      
     nx.onload = function(){
-        tilt.on('*', tiltChanged);
-        startBtn.on('*', startTheSound);
-    };
+        tilt.on('*', tiltChanged); 
+        startBtn.on('*', startSynth);
+      };
 
-    function startTheSound(data){
-        console.log(data);
-        osc.start();
-    }
+      function tiltChanged(data){
+          osc.frequency.value = data.x * 500;
+      }
 
-    function tiltChanged(data){
-        console.log(data);
-        osc.frequency.value = data.value;
-    }
+      function startSynth(){
+          osc.start();    
+      }
+          
+      
   </script>
+
 </body>
 </html>
